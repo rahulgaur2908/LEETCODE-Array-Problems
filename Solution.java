@@ -1,26 +1,23 @@
-// You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+// Given a binary array nums, return the maximum number of consecutive 1's in the array.
 
-// Solution 1.
+// Solution 485.
+
 
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count = 0;
+        int max = 0;
 
-        int[] ans = new int[2];
+        for (int i = 0; i < nums.length; i++) {
 
-        for( int i = 0; i<nums.length; i++){
-
-            for(int j = i+1; j<nums.length; j++){
-
-                if(nums[i] + nums[j] == target){
-
-                    ans[0] = i;
-                    ans[1] = j;
-                    break;
-
-                }
+            if(nums[i] == 1) {
+                count += 1;
+            } else {
+                max = Math.max(max, count);
+                count = 0;
             }
-        }
+        }    
 
-        return ans;
+        return Math.max(max, count);
     }
 }
