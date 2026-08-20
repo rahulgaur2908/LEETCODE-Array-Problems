@@ -1,28 +1,50 @@
-// Given an array nums of integers, return how many of them contain an even number of digits.
+// Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
 
-// Solution 1295.
+// Approach 1: Replace each element by its square and Sort it.
+
+// Solution 977.
+
+
+/*class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int N = nums.length;
+        int[] result = new int[N];
+
+        for (int i = 0; i < N; i++) {
+            result[i] = nums[i] * nums[i];
+        }
+
+        Arrays.sort(result);
+
+        return result;
+    }
+}*/
+
+// Approach 2: Two Pointers.
 
 class Solution {
-    public boolean numberHasEvenDigits(int num) {
-        int digitsCount = 0;
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int l = 0;
+        int r = nums.length - 1;
 
-        while ( num != 0 ) {
-            num = num / 10;
-            digitsCount++;
-        }
+        int [] result = new int[n];
 
-        return digitsCount % 2 == 0;
-    }
+        for (int i = n - 1; i >= 0; i--) {
+            int val;
 
-    public int findNumbers( int[] nums){
-        int evenCount = 0;
+            if (Math.abs(nums[l]) > Math.abs(nums[r])) {
+                val = nums[l];
+                l++;
 
-        for (int i = 0; i < nums.length; i++) {
-            if (numberHasEvenDigits(nums[i])) {
-                evenCount++;
+            } else {
+                val = nums[r];
+                r--;
             }
+
+            result[i] = val * val;
         }
 
-        return evenCount;
+        return result;
     }
-}
+} 
